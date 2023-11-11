@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog :: Home</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+  <div class = "container">
+      <h1>
+          Spring boot bloggy
+      </h1>
+      <hr />
+      <ul>
+          <li><a th:href="@{/posts/new}">New Post</a></li>
+      </ul>
+      <div class = "posts-container">
+      <div class = "post" th:each = "post : ${posts}">
+          <h2><a th:href="@{'/posts/'+${post.id}}"
+          th:text="${post.title}">Title</a></h2>
+          <h3 th:text="'Publised by author '+${post.account.firstName}">First Name </h3>
+          <h5 th:text="'Publised on '+ ${post.createdAt}">Created at</h5>
+          <h5 th:text="' Last Updated at ' + ${post.modifiedAt}">Updated At</h5>
+          <p th:text = "${post.body}">Text body :- </p>
+          <br/>
+      </div>
+      </div>
+      <hr/>
+      <ul sec:authorize="!isAuthenticated()">
+          <li><a th:href="@{/register}">Register</a></li>
+          <li><a th:href="@{/login}">Login</a></li>
+      </ul>
+  <div sec:authorize="isAuthenticated()">
+
+      <form action ="#"
+      th:action="@{logout}"
+      method ="POST">
+          <div class = "form-group">
+              <label>Hi,<span sec:authentication="name">Username</span></label>
+          </div>
+          <button type="submit"> Logout</button>
+
+      </form>
+  </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog :: Post</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class ="container">
+    <div class = "post">
+        <a th:href="@{'/posts'}">Home</a>
+        <h2 th:text="${post.title}">Title </h2>
+        <h3 th:text="'Published by author '+${post.account.firstName}">First Name </h3>
+        <h5 th:text="'Published on ' + ${post.createdAt}">Created at </h5>
+        <h5 th:text="'Updated at ' + ${post.modifiedAt}">Updated At</h5>
+        <p th:text="${post.body}">Text body :- </p>
+    </div>
+    <ul sec:authorze ="isAuthenticated()">
+        <li><a th:href="@{'/posts/'+ ${post.id}+'/edit'}">Edit</a></li>
+        <li><a th:href="@{'/posts/'+ ${post.id}+'/delete'}">Delete</a></li>
+    </ul>
+</div>
+</body>
+</html>

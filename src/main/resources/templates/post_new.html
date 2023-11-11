@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog :: New Post</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class = "container">
+    <a th:href="@{/posts}">Home</a>
+    <form action="#"
+    th:action ="@{'/posts/new'}"
+    th:object="${post}"
+    method = "POST">
+        <input type="hidden" th:field="*{account}" />
+        <input type ="hidden" th:field="*{createdAt}"/>
+        <h2>Write  a post </h2>
+        <div>
+            <label for ="new-post-title">Title</label>
+            <input id ="new-post-title" type ="text" th:field ="*{title}" placeholder="Title"/>
+        </div>
+        <div>
+            <label for ="new-post-body">Body of the post</label>
+            <textarea id ="new-post-body" th:field ="*{body}"></textarea>
+        </div>
+       <button type ="submit">Publish post</button>
+    </form>
+    </div>
+</body>
+</html>
