@@ -1,0 +1,23 @@
+version : '3.1'
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE : blogger
+      MYSQL_ROOT_PASSWORD : database
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    expose:
+      - "3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "9000:8080"
+volumes:
+  mysql:
+    driver: local
