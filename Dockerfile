@@ -1,4 +1,4 @@
 FROM openjdk:17
-WORKDIR /temp
-COPY .* /temp
-ENTRYPOINT ["java","-jar"]
+WORKDIR /app
+COPY target/* /app
+ENTRYPOINT ["java","-jar","blog-now.jar"]
